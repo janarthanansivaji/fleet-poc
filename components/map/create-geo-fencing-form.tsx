@@ -74,13 +74,13 @@ export default function CreateGeoFencingForm ({
               variant={"outline"}
               className="w-full"
             >
-              <ToggleGroupItem value="RZ" className="text-red-700">
+              <ToggleGroupItem value="Restricted Zone" className="text-red-700">
                 <TriangleAlert /> Restricted Zone
               </ToggleGroupItem>
-              <ToggleGroupItem value="P" className="text-green-700">
-                <Factory /> Plant
+              <ToggleGroupItem value="School Zone" className="text-green-700">
+                <Factory /> School Zone
               </ToggleGroupItem>
-              <ToggleGroupItem value="WS" className="text-blue-700">
+              <ToggleGroupItem value="Work Station" className="text-blue-700">
                 <Wrench /> Work Station
               </ToggleGroupItem>
             </ToggleGroup>

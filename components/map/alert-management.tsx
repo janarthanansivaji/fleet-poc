@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { vehicleList } from "@/lib/utils";
 
 interface AlertManagementProps {
   zone: any;
@@ -37,11 +38,7 @@ interface AlertManagementProps {
   onDialogOpenChange: (open: boolean) => void;
 }
 // Example vehicles (you can fetch dynamically if needed)
-const vehicles = [
-  { vin: "MH12AB1234", label: "Truck 1" },
-  { vin: "TN22XY4567", label: "Van A" },
-  { vin: "KL11CD7890", label: "Bike Z" },
-];
+
 export default function AlertsManagement({
   zone,
   dialogOpen,
@@ -100,13 +97,13 @@ console.log(zoneId)
           <div className="flex flex-col gap-1">
             <Label>Vehicle</Label>
             <Select value={selectedVin} onValueChange={setSelectedVin}>
-              <SelectTrigger>
+              <SelectTrigger  className="w-[200px]" >
                 <SelectValue placeholder="Select Vehicle" />
               </SelectTrigger>
               <SelectContent>
-                {vehicles.map((v) => (
+                {vehicleList.map((v) => (
                   <SelectItem key={v.vin} value={v.vin}>
-                    {v.label}
+                    {v.vin}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -128,12 +125,12 @@ console.log(zoneId)
               </SelectContent>
             </Select>
           </div>
-          <div>
-            <Button onClick={handleAddAlert} disabled={loading}>
+           <div className="pt-2">
+           <Button onClick={handleAddAlert} size={'lg'} disabled={loading}>
               {loading && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
               Add
             </Button>
-          </div>
+           </div>
         </div>
 
         <div className="border rounded-md overflow-auto max-h-96">

@@ -83,7 +83,7 @@ export default function AppGeoFencingPage() {
             drawRef={drawRef}
             position="top-right"
             displayControlsDefault={false}
-            controls={{ polygon: true, trash: true }}
+            controls={{ polygon: true, trash: true, }}
             defaultMode="simple_select"
             onCreate={handleDrawCreate}
           />

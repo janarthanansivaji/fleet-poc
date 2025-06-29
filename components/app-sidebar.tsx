@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -15,12 +15,13 @@ import {
   Sailboat,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+} from "lucide-react";
+import Image from "next/image";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@/components/nav-main";
+import { NavProjects } from "@/components/nav-projects";
+import { NavUser } from "@/components/nav-user";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -31,13 +32,13 @@ import {
   SidebarMenuItem,
   SidebarRail,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Johnson Karola",
+    email: "Johnson@srmtech.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
@@ -57,10 +58,7 @@ const data = {
       plan: "Free",
     },
   ],
-  navMain: [
-   
-   
-  ],
+  navMain: [],
   projects: [
     {
       name: "Design Engineering",
@@ -78,15 +76,32 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+      <SidebarHeader className="bg-slate-900 mb-10">
+        <SidebarMenu>
+          <SidebarMenuItem  >
+           <a href="https://www.srmtech.com/who-we-are/" target="_blank">
+           <Image
+              src="https://www.srmtech.com/wp-content/uploads/2025/01/logo_srm_white.png"
+              alt="SRM Tech Logo"
+              width={120}
+              height={60}
+            />
+           </a>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -94,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton title="Vehicles" asChild>
               <a href="vehicles">
                 <CarIcon />
-                {!isCollapsed && <span>Vehicles</span>}
+                {mounted && !isCollapsed && <span>Vehicles</span>}
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -102,7 +117,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton asChild>
               <a href="geo-fencing">
                 <LocateIcon />
-                {!isCollapsed && <span>Geo fencing</span>}
+                {mounted && !isCollapsed && <span>Geo fencing</span>}
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -113,5 +128,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
