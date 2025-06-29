@@ -1,11 +1,12 @@
 "use client";
-import { ReactNode, MutableRefObject, RefObject } from "react";
+import { ReactNode, MutableRefObject, RefObject, useEffect } from "react";
 import Map, {
   FullscreenControl,
   GeolocateControl,
   NavigationControl,
   MapRef,
 } from "react-map-gl/mapbox";
+import { useSidebar } from "../ui/sidebar";
 
 type BaseMapProps = {
   children?: ReactNode;
@@ -13,6 +14,15 @@ type BaseMapProps = {
 };
 
 export default function AppBaseMap({ children, mapRef }: BaseMapProps) {
+  const { state } = useSidebar();
+  useEffect(() => {
+    // Assume `sidebarOpen` is a boolean state that changes on collapse/expand
+    const timeout = setTimeout(() => {
+      mapRef?.current?.resize();
+    }, 300); // Delay slightly to allow layout to settle
+  
+    return () => clearTimeout(timeout);
+  }, [state]);
   return (
     <Map
       ref={mapRef}

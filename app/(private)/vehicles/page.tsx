@@ -8,6 +8,8 @@ import {
   ArrowRightCircle,
   Car,
   CarIcon,
+  Check,
+  ChevronDown,
   ChevronRight,
   ChevronRightCircle,
   Send,
@@ -34,6 +36,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Title } from "@radix-ui/react-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 const vehicleList = [
   {
@@ -3494,6 +3498,7 @@ export default function VehicleTrackingPage() {
   const [currentLocation, setCurrentLocation] = useState<
     [number, number] | null
   >(null);
+  const [open, setOpen] = useState(false);
   const [animationIndex, setAnimationIndex] = useState(0);
   const [isLiveTracking, setIsLiveTracking] = useState(false);
   const [tripLinePath, setTripLinePath] = useState<any>(null);
@@ -3606,7 +3611,52 @@ export default function VehicleTrackingPage() {
   return (
     <div className="flex h-[calc(100dvh-20px)]  flex-row gap-4   w-full overflow-hidden">
       <div className="flex flex-col gap-4 mt-4  px-2 pt-5  ">
-        <Select
+      <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          className="w-[220px] justify-between"
+        >
+          {selectedVin
+            ? `${selectedVin} (${
+                vehicleList.find((v) => v.vin === selectedVin)?.type ?? ""
+              })`
+            : "Select Vehicle VIN"}
+          <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search VIN..." />
+          <CommandList>
+            <CommandEmpty>No vehicles found.</CommandEmpty>
+            {vehicleList.map((vehicle) => (
+              <CommandItem
+                key={vehicle.vin}
+                value={vehicle.vin}
+                onSelect={(currentValue) => {
+                  setSelectedVin(currentValue);
+                  setAnimationIndex(0);
+                  setCurrentLocation(null);
+                  setIsLiveTracking(false);
+                  setOpen(false);
+                }}
+              >
+                <Check
+                  className={`mr-2 h-4 w-4 ${
+                    selectedVin === vehicle.vin ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+                {vehicle.vin} ({vehicle.type})
+              </CommandItem>
+            ))}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+        {/* <Select
           value={selectedVin}
           onValueChange={(vin) => {
             setSelectedVin(vin);
@@ -3625,7 +3675,7 @@ export default function VehicleTrackingPage() {
               </SelectItem>
             ))}
           </SelectContent>
-        </Select>
+        </Select> */}
         <Button disabled={!selectedVin} onClick={handleListVehciles}>
           {" "}
           View Vehicle
@@ -3635,6 +3685,8 @@ export default function VehicleTrackingPage() {
             variant={"link"}
             onClick={() => {
               setSelectedVin("");
+              setSelectedVehicle(null)
+              setCurrentLocation(null);
               setFilterdvehicles(vehicleList);
             }}
           >
@@ -3650,7 +3702,7 @@ export default function VehicleTrackingPage() {
         />
       </div>
       <div className="flex-1 rounded  overflow-hidden">
-        <div className="h-screen relative    m-1  ">
+        <div className="h-screen relative m-1  ">
           <AppBaseMap mapRef={mapRef}>
             {currentLocation &&
               Array.isArray(currentLocation) &&
@@ -3702,7 +3754,7 @@ export default function VehicleTrackingPage() {
               </Source>
             )}
           </AppBaseMap>
-          <div className="bg-gray-100/75 absolute flex flex-col gap-2  z-20 w-1/3 top-2 left-2 h-full bottom-2  overflow-y-auto shadow-md p-2">
+         {selectdVehicle &&( <div className="bg-gray-100/75 absolute flex flex-col gap-2  z-20 w-1/3 top-2 left-2 h-full bottom-2  overflow-y-auto shadow-md p-2">
             <Button
               className="w-full"
               variant={isLiveTracking ? "destructive" : "default"}
@@ -3716,7 +3768,7 @@ export default function VehicleTrackingPage() {
               selectedVehicle={selectdVehicle}
               mapRef={mapRef.current}
             />
-          </div>
+          </div>)}
         </div>
       </div>
     </div>

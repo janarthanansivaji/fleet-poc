@@ -43,7 +43,7 @@ export default function AppGeoFencingPage() {
   }, []);
 
   return (
-    <div className="relative p-0  w-full">
+    <div className="relative p-0  w-full h-full">
       <div className="flex justify-between mb-2">
         <h1 className="text-2xl font-bold mt-4 mb-4">Geo Fencing</h1>
         <div className="flex gap-2 justify-around border p-2">
@@ -75,7 +75,7 @@ export default function AppGeoFencingPage() {
         </div>
       </div>
 
-      <div className="relative h-[calc(100dvh-150px)]">
+      <div className="relative w-full h-[calc(100dvh-150px)]">
         <AppBaseMap mapRef={mapRef} 
      
      >

@@ -91,7 +91,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton title="Vehicles" asChild>
               <a href="vehicles">
                 <CarIcon />
                 {!isCollapsed && <span>Vehicles</span>}
