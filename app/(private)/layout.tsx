@@ -21,7 +21,7 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           /> */}
-          <p className="font-bold text-lg">SRM <span className="text-blue-400">Tech</span></p>
+          <p className="font-bold text-lg">Fleet <span className="text-blue-400">Vista</span></p>
       </header>
       <div className="flex w-full relative overflow-hidden flex-1 flex-col gap-4 p-1 pt-0 overflow-hidden">
         {children}

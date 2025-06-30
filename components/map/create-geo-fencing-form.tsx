@@ -10,7 +10,7 @@ import {
   } from "../ui/dialog";
   import { Input } from "../ui/input";
   import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
-  import { Factory, TriangleAlert, Wrench } from "lucide-react";
+  import { Factory, LandPlot, TriangleAlert, Wrench } from "lucide-react";
   import { Button } from "../ui/button";
 import { useState } from "react";
 import geoFenceService from "@/lib/geo-fence-service";
@@ -74,14 +74,14 @@ export default function CreateGeoFencingForm ({
               variant={"outline"}
               className="w-full"
             >
-              <ToggleGroupItem value="Restricted Zone" className="text-red-700">
-                <TriangleAlert /> Restricted Zone
+              <ToggleGroupItem value="SECTOR01" className="text-red-700">
+                <LandPlot /> Sector 01
               </ToggleGroupItem>
-              <ToggleGroupItem value="School Zone" className="text-green-700">
-                <Factory /> School Zone
+              <ToggleGroupItem value="SECTOR02" className="text-green-700">
+                <LandPlot /> Sector 02
               </ToggleGroupItem>
               <ToggleGroupItem value="Work Station" className="text-blue-700">
-                <Wrench /> Work Station
+                <LandPlot /> Sector 03
               </ToggleGroupItem>
             </ToggleGroup>
           </div>

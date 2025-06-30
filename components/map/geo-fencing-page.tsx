@@ -9,7 +9,7 @@ import { borderLayer, fillLayer, labelLayer } from "@/components/map/layer";
 import AlertPopup from "@/components/map/alert-popup";
 import CreateGeoFencingForm from "@/components/map/create-geo-fencing-form";
 import ZoneList from "@/components/zone-list";
-import { TriangleAlert, Factory, Wrench } from "lucide-react";
+import { TriangleAlert, Factory, Wrench, LandPlot } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import AppBaseMap from "./app-base-map";
 
@@ -47,29 +47,29 @@ export default function AppGeoFencingPage() {
       <div className="flex justify-between mb-2">
         <h1 className="text-2xl font-bold mt-4 mb-4">Geo Fencing</h1>
         <div className="flex gap-2 justify-around border p-2">
-          <div className="flex flex-1 flex-col items-center p-1">
+          <div className="flex  flex-col items-center p-1">
             <Label className="font-extrabold ">
-              <TriangleAlert className="size-4 text-red-700" />
+              <LandPlot className="size-4 text-red-700" />
               100
             </Label>
             <Label className="text-xs text-red-700 tracking-wide">
-              Restricted Zones
+             Sector 1
             </Label>
           </div>
-          <div className="flex flex-1 flex-col items-center p-1 border-x ">
+          <div className="flex lfex-col items-center p-1 border-x ">
             <Label className="font-extrabold ">
-              <Factory className="size-4 text-green-700" />
+              <LandPlot className="size-4 text-green-700" />
               100
             </Label>
-            <Label className="text-xs text-green-700 tracking-wide">Plant</Label>
+            <Label className="text-xs text-green-700 tracking-wide">Sector 2</Label>
           </div>
-          <div className="flex flex-1 flex-col items-center p-1">
+          <div className="flex flex-col items-center p-1">
             <Label className="font-extrabold ">
-              <Wrench className="size-4 text-blue-700" />
+              <LandPlot className="size-4 text-blue-700" />
               100
             </Label>
             <Label className="text-xs text-blue-700 tracking-wide">
-              Work Station
+             Sector 3
             </Label>
           </div>
         </div>
